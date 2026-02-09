@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine? ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    #funnyText {
+      font-size: 18px;
+      color: #ffb6c1;
+      height: 25px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 90px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      margin-right: 20px;
+    }
+
+    #no {
+      background: #444;
+      color: white;
+      position: absolute;
+    }
+
+    .reveal {
+      display: none;
+      text-align: center;
+    }
+
+    .reveal img {
+      width: 260px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 105, 180, .7);
+      margin-top: 20px;
+    }
+
+    .final {
+      font-size: 26px;
+      margin-top: 25px;
+      color: #ff69b4;
+    }
+
+    /* Notification Screen Styles */
+    #notification {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .mail-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    .notify-text {
+      font-size: 24px;
+      color: #ffb6c1;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(-30px);
+      }
+
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+
+    #question {
+      display: none;
+      /* Hidden initially */
+    }
+  </style>
+</head>
+
+<body>
+
+  <audio id="music" loop>
+    <source src="AUDIO-2026-02-09-16-18-52.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="notification">
+    <div class="mail-icon">📩</div>
+    <div class="notify-text">Hello Jeevitha, you have received one mail</div>
+    <div style="margin-top:10px; font-size:14px; color:#666;">(Click to open)</div>
+  </div>
+
+  <div class="container" id="question">
+    <h1> JEEVITHA Will you be my Valentine? 💖</h1>
+    <div id="funnyText"></div>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">YES</button>
+      <button id="no">NO</button>
+    </div>
+  </div>
+
+  <div class="reveal" id="reveal">
+    <img src="image/Image.jpg" alt="Valentine Photo">
+    <div class="final">
+      You just made me<br>
+      the happiest person ❤️<br><br>
+      Mrs. Jeevitha Paveesh
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const funnyText = document.getElementById("funnyText");
+    const notification = document.getElementById("notification");
+    const question = document.getElementById("question");
+
+    // Show question when notification is clicked
+    notification.addEventListener("click", () => {
+      notification.style.display = "none";
+      question.style.display = "block";
+      document.getElementById("music").play();
+    });
+
+    const messages = [
+      "ena patha pavama ilaya 😢",
+      "ena vitu pogaatha 😭",
+      "pls accept me 🙏",
+      "YES tha correct answer ❤️"
+    ];
+
+    let msgIndex = 0;
+
+    noBtn.addEventListener("mouseover", () => {
+      // move button
+      const x = Math.random() * 240 - 120;
+      const y = Math.random() * 80 - 40;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+      // change text
+      funnyText.innerText = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+    });
+
+    function sayYes() {
+      document.getElementById("question").style.display = "none";
+      document.getElementById("reveal").style.display = "block";
+      document.getElementById("music").play();
+    }
+  </script>
+
+</body>
+
+</html>
